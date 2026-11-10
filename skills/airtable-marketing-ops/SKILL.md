@@ -131,17 +131,7 @@ The installer audience for this plugin is AI-forward by selection. Each lead sub
 
 ## Voice and tone for generated marketing copy
 
-When the agent generates customer-facing copy (campaign briefs, ad copy, email subject lines, content drafts, social posts), keep output on-brand:
-
--   **Inspiring, Concise, Human, Vibrant** — encouraging without overpromising; cut filler; sound like a person, not a robot; find fresh phrasing instead of business clichés.
--   **Sentence case** everywhere (exceptions: blog titles for SEO, proper nouns).
--   **Contractions are fine** — use them.
--   **No "magic" or "automagic"** — features get built by real effort.
--   **No clichés** — _"last but not least," "X / Y / Z, oh my," "synergize," "rockstar," "secret sauce," "circle back," "move the needle"_ — avoid.
--   **Sparing exclamation marks** — max one per screen.
--   **Numerals for 10+, spell out 0-9.**
-
-The user may pass brand-voice guidelines as input — use those over these defaults when they conflict.
+See `references/voice-and-tone.md` when generating customer-facing copy.
 
 ## Composition
 
@@ -163,62 +153,8 @@ Standing rule: if a tool call didn't prove the access surface, don't link to it.
 
 ## Build-plan output
 
-Two output shapes, depending on which layers apply. Pick what matches what the user actually asked for — don't over-build (no custom app for _"track our campaigns"_) and don't under-build (no UI-step list when they asked for _"a branded brand-asset portal"_).
-
-**Before listing items in any `Configure in Airtable` or `Configure Portal` block below, check the live MCP at `mcp.airtable.com/mcp` for current support — if the MCP now authors a surface you'd otherwise hand off (view, Interface page, Automation, Form, etc.), use the MCP path instead. The MCP's capability boundary is moving fast; what's a UI handoff today may be MCP-driven tomorrow.**
-
-**Pure Airtable** (most common — user wants the native experience):
-
-```
-✅ Built (via MCP):
-  - [Base name] with [N] tables, [N] fields, linked records, [N] seed records
-  - View in Airtable: [base link]
-
-🎨 Configure in Airtable:
-  - [Specific calendar / kanban / gallery view, e.g. "Calendar view on Campaigns keyed by Launch date"] — [click here]
-  - [Specific interface page for the right stakeholder audience] — [click here]
-  - [Specific form / automation, e.g. "Form for marketing request intake" or "Slack notification on Status = Approved"] — [click here]
-```
-
-**Airtable + custom app** (user wants a branded UI, public portal, self-serve generator, or agency client portal):
-
-```
-✅ Built (via MCP):
-  - [Base + schema]
-  - View in Airtable: [base link]
-
-🛠️ Custom app:
-  - [Next.js portal at vercel-deploy-url, or self-serve collateral generator]
-  - Reads / writes [tables] via Airtable REST API
-  - PAT scoped to [scopes]
-  - Source: [github-repo-link]
-
-🎨 Configure in Airtable:
-  - [Admin interface page for triage] — [click here]
-  - [Automation tying app to base events] — [click here]
-```
-
-Pick the 1-3 most-impactful UI handoffs; don't enumerate every possible view. The user can ask for more once they're inside the base.
+See `references/build-plan-templates.md` for the four output shapes and their exact templates.
 
 ## Anti-patterns (what NOT to default to)
 
-These are the recurring failure modes — defaulting to assumptions the data doesn't support.
-
--   **Don't default to a B2B SaaS frame.** Industry diversity is the rule — CPG, apparel, financial services, healthcare, pharma, media, telecom, automotive, energy, hospitality, music labels, agencies, education, nonprofit. Probe broadly before assuming.
--   **Don't assume HubSpot OR Marketo.** HubSpot dominates below Enterprise; Marketo dominates Enterprise. Mailchimp / Klaviyo / Customer.io / Iterable / Braze / Pardot all have real share. Ask before recommending.
--   **Don't assume Salesforce as CRM backbone.** Heavy at Enterprise, lighter below. Mid-market often uses Airtable AS a lightweight CRM alternative for customer-marketing — don't override that pattern.
--   **Don't assume Slack.** Microsoft Teams + Outlook + SharePoint is roughly half of Enterprise. Healthcare / auto / EU enterprise / government skew Microsoft.
--   **Don't default to ABM scaffolding.** Rare in deployed setups; essentially absent below Enterprise. Surface only when the user explicitly raises account-based motion.
--   **Don't default to a B2B demand-gen frame.** Marketing-ops in the wild is overwhelmingly B2C / enterprise-brand-management / agency-shaped. Demand-gen is a sub-niche, not the default.
--   **Don't over-promise on AI.** AI deployment in marketing-ops is overwhelmingly aspirational — even more so than in product-ops. Workflows should compose AI cleanly when available but work without it. The skill's value-add is helping customers _get there_.
--   **Don't assume Claude or OpenAI access.** Approved-vendor LLM constraints are real (Azure OpenAI is more common in marketing-ops than in product-ops; Gemini-only also appears). Ask.
--   **Don't undersize the SMB case — but don't assume it's a solo marketer either.** The dominant SMB shape is **agencies running multi-client delivery on Airtable**, not solo marketers. Probe.
--   **Don't be shy about consolidation framing for work-management tools.** Workfront / Asana / Monday / Wrike / Smartsheet / ClickUp / Trello / Notion all silo task data and impose schemas that fight marketing taxonomies. Airtable's relational layer + consolidating onto a single platform is the value-prop — lean on the customer-pain language (_"swivel-chair work,"_ _"too many sources of truth,"_ _"fragmented spreadsheets"_) when explaining why consolidation pays off. Per-tool migration guidance lives in `references/migrations.md`; the hybrid "Airtable as planning layer in front of existing tool" shape is documented in `references/build-shapes.md` for users who want consolidation benefits without retiring the existing tool. Follow the user's preference — full migration, hybrid, or status-quo-with-Airtable-elsewhere are all valid choices to support.
--   **Don't push a separate DAM by default.** Airtable can serve as the DAM via Attachment fields + an Assets table for moderate asset volumes — that's a real Airtable capability, not a fallback. Recommend Bynder / Frontify / Brandfolder / Adobe DAM only when the user is at high-volume enterprise scale OR explicitly asks for a specialized DAM.
--   **Don't default to 5-deep campaign hierarchies.** Aspirational in Enterprise customers still building customers; rare in deployed because they're fragile to maintain. Default to 3-tier (Campaign → Tactic → Task); offer 4-tier on demand.
--   **Don't default to localization scaffolding.** Rare overall, and almost all Enterprise-only. Add locale-aware fields when asked, not by default.
--   **Don't default to PO / budget tracking.** Enterprise-heavy — uncommon below Enterprise. Adds heavy field count and a finance-partner workflow. Surface as an add-on when the user mentions budget, spend, or PO.
--   **Don't auto-create views, interface pages, automations, or forms via MCP.** Hand them off as UI configuration steps with `[click here]` links; the visual builders are best-in-class.
--   **Don't push the REST API tier unless the user actually needs it.** Native Airtable handles most marketing-ops shapes well. Custom-app is the right answer when the user wants something public-facing, branded, embedded, or chat-driven — not when they want _"a campaign tracker."_
-
-When in doubt about which path to take, ask. Two scope questions cost ten seconds; rebuilding the wrong shape costs an hour.
+See `references/anti-patterns.md` before proposing a build.

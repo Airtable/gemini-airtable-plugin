@@ -1,7 +1,6 @@
 {
   "mcpServers": {
     "airtable": {
-      "type": "http",
       "url": "https://mcp.airtable.com/mcp"
     }
   }

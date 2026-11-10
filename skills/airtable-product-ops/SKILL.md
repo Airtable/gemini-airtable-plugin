@@ -134,71 +134,8 @@ Standing rule: if a tool call didn't prove the access surface, don't link to it.
 
 ## Build-plan output
 
-Three output shapes, depending on which layers apply. Pick what matches what the user actually asked for — don't over-build (no custom app for _"track my projects"_) and don't under-build (no UI-step list when they asked for _"a customer-facing portal"_).
-
-**Before listing items in any `Configure in Airtable` or `Configure Portal` block below, check the live MCP at `mcp.airtable.com/mcp` for current support — if the MCP now authors a surface you'd otherwise hand off (view, Interface page, Automation, Form, etc.), use the MCP path instead. The MCP's capability boundary is moving fast; what's a UI handoff today may be MCP-driven tomorrow.**
-
-**Pure Airtable** (most common — user wants the native experience):
-
-```
-✅ Built (via MCP):
-  - [Base name] with [N] tables, [N] fields, linked records, [N] seed records
-  - View in Airtable: [base link]
-
-🎨 Configure in Airtable:
-  - [Specific Kanban / calendar / gallery view] — [click here]
-  - [Specific interface page for the right stakeholder audience] — [click here]
-  - [Specific form / automation] — [click here]
-```
-
-**Airtable + Portals** (user wants branded external access for customers / partners / vendors without building a custom app):
-
-```
-✅ Built (via MCP):
-  - [Base + schema]
-  - View in Airtable: [base link]
-
-🌐 Configure Portal:
-  - Enable Portal on the [Customer feedback intake / Partner roadmap] interface — [click here]
-  - Customize branded sign-in page (logo + background) — [click here]
-  - Invite first portal guest(s) — [click here]
-
-🎨 Configure in Airtable:
-  - [Admin interface page for internal triage] — [click here]
-  - [Automation tying portal events to internal workflow] — [click here]
-```
-
-**Airtable + custom app** (user wants a public-facing roadmap, marketing-grade brand, embedded surface, or chat-surface bot on top):
-
-```
-✅ Built (via MCP):
-  - [Base + schema]
-  - View in Airtable: [base link]
-
-🛠️ Custom app:
-  - [Next.js portal at vercel-deploy-url]
-  - Reads / writes [tables] via Airtable REST API
-  - PAT scoped to [scopes]
-  - Source: [github-repo-link]
-
-🎨 Configure in Airtable:
-  - [Admin interface page for triage] — [click here]
-  - [Automation tying app to base events] — [click here]
-```
-
-Pick the 1-3 most-impactful UI handoffs; don't enumerate every possible view. The user can ask for more once they're inside the base.
+See `references/build-plan-templates.md` for the four output shapes and their exact templates.
 
 ## Anti-patterns (what NOT to default to)
 
-These are the recurring failure modes — defaulting to assumptions the data doesn't support.
-
--   **Don't default to a tech-product-team frame.** Industry diversity is the rule. Banking, apparel, pharma, media, aerospace, energy all run product ops in Airtable. Probe broadly before assuming "product" means "software product."
--   **Don't assume the user has Jira.** A significant minority do, not the majority. Build the schema first; ask about engineering-tracker integration as a follow-up branch.
--   **Don't assume Slack.** Microsoft Teams is more common in healthcare, auto, EU enterprise, and many large non-tech orgs.
--   **Don't lead with feature flags or experimentation.** Those workflows live in dedicated platforms (Statsig, LaunchDarkly) and are essentially absent from real product-ops Airtable setups. Stick to roadmap, feedback, launch, OKRs, capacity.
--   **Don't assume Claude or OpenAI access.** Approved-vendor LLM constraints are real (Gemini-only, no third-party LLMs in some enterprises). Ask before recommending an AI integration tied to a specific provider.
--   **Don't undersize the lightweight case.** A real archetype is the 5-person team with a single backlog table — pushing the canonical 7-table schema on them is overcorrection.
--   **Use MCP for what it currently supports; hand off the rest as `[click here]` UI steps.** Query the live MCP at execution time rather than assuming what it does or doesn't author. The boundary is a capability one (and closing over time), not a quality choice — don't frame the handoff as "the UI does this better."
--   **Don't push the REST API tier unless the user actually needs it.** Native Airtable handles most product-ops shapes well. The custom-app layer is the right answer when the user wants something public-facing, branded, embedded, or chat-driven — not when they want _"a roadmap base."_
-
-When in doubt about which path to take, ask. Two scope questions cost ten seconds; rebuilding the wrong shape costs an hour.
+See `references/anti-patterns.md` before proposing a build.

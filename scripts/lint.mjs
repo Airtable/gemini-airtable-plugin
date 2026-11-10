@@ -100,6 +100,7 @@ if (mcp) {
         else if (!new URL(server.url).hostname.endsWith('airtable.com')) {
             fail(`mcp_config.json: server "${name}" must be on a verified airtable.com host`)
         }
+        if ('type' in server) fail(`mcp_config.json: server "${name}" declares "type"; transport is inferred from url`)
     }
 }
 
@@ -134,6 +135,9 @@ for (const entry of entries) {
 
     const body = text.slice(front[0].length)
     const lines = body.split('\n').length
+    const bytes = Buffer.byteLength(body)
+    if (bytes > 24000) fail(`${rel}: body is ${bytes} bytes (loader truncates above 24000)`)
+    else if (bytes > 20000) warn(`${rel}: body is ${bytes} bytes (24000 limit, little headroom)`)
     if (lines > 500) fail(`${rel}: body is ${lines} lines (max 500)`)
     else if (lines > 300) warn(`${rel}: body is ${lines} lines (150-300 target)`)
 
