@@ -1,6 +1,6 @@
 ---
 name: airtable-overview
-description: Explains what Airtable is and how data is structured — bases, tables, fields, records, views, automations, and interfaces. Use when you need context about the Airtable data model.
+description: Explains what Airtable is and how data is structured — bases, tables, fields, records, views, automations, and interfaces. Use when you need context about the Airtable data model. Don't use for building, querying, or changing a base — load it only to orient on terminology; route the actual work to the ops skills or `airtable-filters`.
 license: MIT
 metadata:
     version: '1.0.0'

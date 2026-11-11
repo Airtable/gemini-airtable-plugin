@@ -1,6 +1,6 @@
 ---
 name: airtable-marketing-ops
-description: Set up and run Airtable-based marketing operations workflows — request intake, campaign orchestration, creative production, content calendars, brand and compliance review, events, localization, budgets and ROI, capacity planning. Use when the user wants a marketing request "front door," to manage campaigns, coordinate briefs and assets, build a content calendar, plan launches or events, track budgets, measure ROI, or set up agency multi-client delivery. Adapts to org size (solo marketer to enterprise multi-brand or agency) and integrates with or displaces tools like HubSpot, Marketo, Mailchimp, Klaviyo, Workfront, Asana, Monday, and Wrike. Asks scope first.
+description: Set up and run Airtable-based marketing operations workflows — request intake, campaign orchestration, creative production, content calendars, brand and compliance review, events, localization, budgets and ROI, capacity planning. Use when the user wants a marketing request "front door," to manage campaigns, coordinate briefs and assets, build a content calendar, plan launches or events, track budgets, measure ROI, or set up agency multi-client delivery. Adapts to org size (solo marketer to enterprise multi-brand or agency) and integrates with or displaces tools like HubSpot, Marketo, Mailchimp, Klaviyo, Workfront, Asana, Monday, and Wrike. Asks scope first. Don't use for product roadmaps, sales pipelines, or post-sale support.
 license: MIT
 metadata:
     version: '0.1.0'
